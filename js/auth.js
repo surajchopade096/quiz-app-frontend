@@ -21,6 +21,8 @@ async function login() {
 
     const res = await apiRequest("/auth/login", "POST", data);
 
+    console.log("LOGIN RESPONSE:", res); // 🔥 DEBUG
+
     if (res.token) {
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", JSON.stringify(res.user));

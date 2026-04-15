@@ -3,20 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App | Home</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Quiz App | Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray: #71717a;
+            --border-alpha: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            /* --- LOW OPACITY PATTERN --- */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--color-black);
+            overflow: hidden;
+        }
+
+        /* The glass container */
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 50px 40px;
+            border: 1px solid var(--border-alpha);
+            border-radius: 2px; /* Sharp corners for professional look */
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        /* Decorative Accent Line */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-black);
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+            color: var(--color-gray);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid var(--color-black);
+        }
+
+        .btn-primary {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-black);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-black);
+        }
+
+        .btn-secondary:hover {
+            background: #f4f4f5;
+        }
+
+        .leaderboard-link {
+            display: block;
+            margin-top: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--color-black);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .leaderboard-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Corner accents for the "Tech/Architect" feel */
+        .corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+        }
+        .top-right { top: 20px; right: 20px; border-bottom: none; border-left: none; }
+        .bottom-left { bottom: 20px; left: 20px; border-top: none; border-right: none; }
+
+    </style>
 </head>
 <body>
-    <div class="container" style="text-align: center;">
-        <h1>Welcome to Quiz App 🚀</h1>
-        <p>Choose an option to continue:</p>
 
-        <button onclick="location.href='pages/login.html'">Login</button>
-        <button onclick="location.href='pages/register.html'" style="background-color: #28a745;">Register</button>
-        
-        <hr style="margin: 20px 0;">
-        
-        <a href="pages/leaderboard.html" style="text-decoration: none; color: #007bff;">View Leaderboard</a>
+    <div class="card">
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+
+        <div class="header">
+            <span class="label">System.v1.0</span>
+            <h1>QUIZ <br> ARCHIVE</h1>
+        </div>
+
+        <div class="btn-stack">
+            <button class="btn btn-primary" onclick="location.href='pages/login.html'">Enter Portal</button>
+            <button class="btn btn-secondary" onclick="location.href='pages/register.html'">Create Identity</button>
+        </div>
+
+        <a class="leaderboard-link">Developed By → @ SRS </a>
     </div>
+
 </body>
 </html>

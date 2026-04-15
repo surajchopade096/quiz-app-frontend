@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | System Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray: #71717a;
+            --color-light-gray: #f4f4f5;
+            --border-alpha: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--color-black);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-alpha);
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-black);
+        }
+
+        .admin-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--color-black);
+            padding-bottom: 20px;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gray);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Nav Buttons */
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--color-black);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* Forms & Inputs */
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--color-black);
+            padding-left: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-black);
+            border-radius: 0;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            box-shadow: 4px 4px 0px var(--color-black);
+            transform: translate(-2px, -2px);
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 20px;
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+        }
+
+        /* List Styling */
+        .data-list-item {
+            padding: 15px;
+            border: 1px solid var(--border-alpha);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            background: var(--color-white);
+        }
+
+        .data-list-item:hover {
+            border-color: var(--color-black);
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="admin-header">
+        <span class="label">System Overlord</span>
+        <h2>Admin Panel</h2>
+    </div>
+
+    <div class="admin-nav">
+        <button class="nav-btn active" onclick="showSection('add')">Add Question</button>
+        <button class="nav-btn" onclick="showSection('list')">View Questions</button>
+        <button class="nav-btn" onclick="showSection('results')">View Results</button>
+    </div>
+
+    <div id="addSection">
+        <h3>New Question Entry</h3>
+        <div class="form-grid">
+            <input id="question" placeholder="Question Description" class="full-width">
+            <input id="opt1" placeholder="Option 01">
+            <input id="opt2" placeholder="Option 02">
+            <input id="opt3" placeholder="Option 03">
+            <input id="opt4" placeholder="Option 04">
+            <input id="correct" placeholder="Correct Index (0-3)">
+            <input id="language" placeholder="Language (Java/C/Python)">
+        </div>
+        <button class="action-btn" onclick="addQuestion()">Commit to Database</button>
+    </div>
+
+    <div id="listSection" style="display:none;">
+        <h3>Question Archive</h3>
+        <div id="questionsList"></div>
+    </div>
+
+    <div id="resultsSection" style="display:none;">
+        <h3>System Logs / Results</h3>
+        <div id="resultsList"></div>
+    </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/protect.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+    checkAuth();
+    checkAdmin();
+
+    
+    // Simple UI helper to toggle active button state
+    function showSection(section) {
+        // Your existing logic
+        document.getElementById('addSection').style.display = 'none';
+        document.getElementById('listSection').style.display = 'none';
+        document.getElementById('resultsSection').style.display = 'none';
+        document.getElementById(section + 'Section').style.display = 'block';
+
+        // Update button visual state
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+</script>
+
+</body>
+</html>

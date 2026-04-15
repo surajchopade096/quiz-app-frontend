@@ -3,92 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Results | System Evaluation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Unified Modern UI Style */
-        body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray: #71717a;
+            --border-alpha: rgba(0, 0, 0, 0.1);
         }
 
-        .container {
-            background: #ffffff;
-            padding: 3rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            /* MATCHING GRID PATTERN */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--color-black);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border: 1px solid var(--border-alpha);
+            border-radius: 2px;
             width: 100%;
-            max-width: 350px;
-            border-top: 6px solid #4A90E2; /* Accent top border */
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            position: relative;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Black Accent Line */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-black);
+        }
+
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-gray);
+            display: block;
+            margin-bottom: 10px;
         }
 
         h2 {
-            color: #333;
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .score-display {
+            border: 2px solid var(--color-black);
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
         #score {
-            font-size: 2.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            color: #4A90E2;
-            background: #f0f7ff;
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 50px;
-            margin: 1.5rem 0;
-            border: 2px dashed #4A90E2;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .score-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 4px 10px;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
 
         .action-btn {
             display: block;
             width: 100%;
-            padding: 12px;
-            margin-top: 1rem;
-            background-color: #4A90E2;
-            color: white;
+            padding: 16px;
+            background: var(--color-black);
+            color: var(--color-white);
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 1px solid var(--color-black);
+            transition: all 0.3s ease;
         }
 
         .action-btn:hover {
-            background-color: #357ABD;
+            background: transparent;
+            color: var(--color-black);
         }
 
-        /* Subtle animation for the score appearing */
-        @keyframes popIn {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .home-link {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--color-gray);
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
-        .container {
-            animation: popIn 0.4s ease-out forwards;
+        .home-link:hover {
+            color: var(--color-black);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Quiz Completed!</h2>
-    <div id="score">Score: 0</div>
+<div class="card">
+    <span class="label">Session Terminated</span>
+    <h2>Evaluation <br> Complete</h2>
+
+    <div class="score-display">
+        <div id="score">0</div>
+        <span class="score-label">Marks Secured</span>
+    </div>
     
     <a href="leaderboard.html" class="action-btn">View Leaderboard</a>
-    <a href="language.html" class="action-btn" style="background-color: #6c757d;">Try Again</a>
+    <a href="../index.html" class="home-link">Return to Home →</a>
 </div>
 
 <script>
-    // Logic remains exactly as you had it
     const result = JSON.parse(localStorage.getItem("result"));
     if (result && result.score !== undefined) {
-        document.getElementById("score").innerText = "Score: " + result.score;
+        document.getElementById("score").innerText = result.score;
     }
 </script>
 
