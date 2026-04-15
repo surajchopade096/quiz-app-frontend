@@ -1,4 +1,4 @@
-const BASE_URL = "https://quiz-app-backend-tzoh.onrender.com";
+const BASE_URL = "https://quiz-app-backend-tzoh.onrender.com/api";
 
 // Helper function
 async function apiRequest(url, method = "GET", body = null) {
